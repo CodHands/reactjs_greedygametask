@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
+    "@wojtekmaj/react-daterange-picker": "^2.2.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-material-ui-datatable": "2.0.0-alpha.18",
     "react-scripts": "3.0.1"
   },
   "scripts": {
