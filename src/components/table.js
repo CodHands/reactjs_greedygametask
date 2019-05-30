@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-// import { ReactMUIDatatable } from "react-material-ui-datatable";
 import MUIDataTable from "mui-datatables";
 
 
-export default ({ tabularData, page }) => {
-
+export default ({ tabularData }) => {
     const [tableData, setTableData] = useState(tabularData)
 
     useEffect(() => {
-        setTableData(tabularData);
-    }, [tabularData, page])
+        let updatedTableData = tabularData.map((tb) => {
+            tb['eCPM'] = ((tb.revenue / tb.impressions) * 1000).toFixed(3);
+            return tb
+        })
+        setTableData(updatedTableData);
+    }, [tabularData])
 
     const options = {
         responsive: "scroll",
@@ -18,17 +20,18 @@ export default ({ tabularData, page }) => {
         filter: false,
         print: false,
         download: false,
-        viewColumns: false
+        viewColumns: false,
+        page: 0,
+        rowsPerPageOptions: [5, 10]
     };
 
     const columns = [
         { name: "timestamp", label: "Date" },
         { name: "game", label: "Game" },
         { name: "revenue", label: "Revenue" },
-        { name: "impressions", label: "Impressions" }
+        { name: "impressions", label: "Impressions" },
+        { name: "eCPM", label: "eCPM" }
     ]
-
-    console.log(tableData);
 
     return (
         <div className="margin-xy">

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
 export default ({ dateRange, filterRange }) => {
-    const maxDate = dateRange[0].timestamp;
-    const minDate = dateRange[dateRange.length - 1].timestamp;
 
     const [date, setDate] = useState([new Date(), new Date()])
+    const [minDate] = useState(dateRange[dateRange.length - 1].timestamp)
+    const [maxDate] = useState(dateRange[0].timestamp)
 
     const onChange = (selectedDate) => {
         setDate(selectedDate)
@@ -43,3 +43,5 @@ export default ({ dateRange, filterRange }) => {
         </div>
     )
 }
+
+

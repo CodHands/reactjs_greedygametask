@@ -32,13 +32,11 @@ export default ({ lineChartData }) => {
 
     const options = {
         legend: {
-            display: false,
-            position: 'top',
-            fontSize: 25
+            display: false
         },
         scales: {
-            xAxes: [{ gridLines: { drawOnChartArea: false, lineWidth: 2 } }],
-            yAxes: [{ gridLines: { drawOnChartArea: false, lineWidth: 2 } }]
+            xAxes: [{ gridLines: { drawOnChartArea: false } }],
+            yAxes: [{ gridLines: { drawOnChartArea: false } }]
         }
     }
 

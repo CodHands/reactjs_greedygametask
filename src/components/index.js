@@ -4,9 +4,10 @@ import DateRangePicker from './dateRangePicker';
 import TabularView from './table';
 import LineChart from './lineChart';
 
-export default () => {
+const Home = () => {
 
     const [data, setData] = useState([])
+    const [filteredData, setFilteredData] = useState([])
 
     useEffect(() => {
         fetchData();
@@ -16,14 +17,12 @@ export default () => {
         try {
             let response = await fetch(`${BASE_URI}`)
             let list = await response.json()
-            console.log(list);
             if (list && list.length) {
                 let sortedList = list.sort(function (a, b) {
-                    // Turn your strings into dates, and then subtract them
-                    // to get a value that is either negative, positive, or zero.
                     return new Date(b.timestamp) - new Date(a.timestamp);
                 });
                 setData(sortedList)
+                setFilteredData(sortedList)
             }
         } catch (e) {
             throw e;
@@ -32,18 +31,20 @@ export default () => {
 
     const filterDate = (filteredDates) => {
         const filteredData = data.filter((el) => el.timestamp >= filteredDates[0] && el.timestamp <= filteredDates[1]);
-        setData(filteredData);
+        setFilteredData(filteredData);
     }
 
     return (
         <div className="game-data">
-            {data && data.length ?
+            {filteredData && filteredData.length ?
                 (<div>
-                    <DateRangePicker dateRange={data} filterRange={filterDate} />
-                    <TabularView tabularData={data} />
-                    <LineChart lineChartData={data} />
+                    <DateRangePicker dateRange={filteredData} filterRange={filterDate} />
+                    <LineChart lineChartData={filteredData} />
+                    <TabularView tabularData={filteredData} />
                 </div>)
-                : null}
+                : <img src="/images/loading.gif" className="loader-spinner" alt="loader" />}
         </div>
     )
 }
+
+export default Home
