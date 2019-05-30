@@ -1,11 +1,24 @@
-import React from 'react';
-import { ReactMUIDatatable } from "react-material-ui-datatable";
+import React, { useEffect, useState } from 'react';
+// import { ReactMUIDatatable } from "react-material-ui-datatable";
+import MUIDataTable from "mui-datatables";
 
-export default ({ tabularData }) => {
+
+export default ({ tabularData, page }) => {
+
+    const [tableData, setTableData] = useState(tabularData)
+
+    useEffect(() => {
+        setTableData(tabularData);
+    }, [tabularData, page])
+
     const options = {
-        filter: true,
-        filterType: "dropdown",
-        responsive: "scroll"
+        responsive: "scroll",
+        rowsPerPage: 5,
+        search: false,
+        filter: false,
+        print: false,
+        download: false,
+        viewColumns: false
     };
 
     const columns = [
@@ -15,14 +28,15 @@ export default ({ tabularData }) => {
         { name: "impressions", label: "Impressions" }
     ]
 
+    console.log(tableData);
+
     return (
         <div className="margin-xy">
-            <ReactMUIDatatable data={tabularData}
+            <MUIDataTable
+                data={tableData}
                 columns={columns}
                 options={options}
-                searchable={false}
-                filterable={false}
-            />;
+            />
         </div>
     )
 }

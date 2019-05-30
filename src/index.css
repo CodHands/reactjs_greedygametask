@@ -1,13 +1,24 @@
 body {
-  /* background: #424250; */
+  background: #424250;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff !important;
 }
 
 .App {
+  position: relative;
+  min-height: 100vh;
+  height: 100vh;
+  margin: 0;
+}
+
+.game-data {
   position: absolute;
+  min-height: 50vh;
+  height: 50vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
+  width: 90%;
   margin: 0 auto;
   text-align: center;
 }
@@ -23,4 +34,22 @@ table {
 
 .MuiCheckbox-root {
   display: none !important;
+}
+
+.react-daterange-picker__calendar {
+  z-index: 2 !important;
+}
+
+.react-daterange-picker__wrapper {
+  border: 2px solid #f75580 !important;
+}
+
+.react-daterange-picker__inputGroup,
+.react-daterange-picker__inputGroup__input,
+.react-daterange-picker {
+  color: #fff;
+}
+
+.chart {
+  padding: 15px !important;
 }

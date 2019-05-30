@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { BASE_URI } from '../services';
 import DateRangePicker from './dateRangePicker';
-import TabularView from './table'
+import TabularView from './table';
+import LineChart from './lineChart';
 
 export default () => {
 
@@ -28,14 +29,19 @@ export default () => {
             throw e;
         }
     }
-    console.log(data);
+
+    const filterDate = (filteredDates) => {
+        const filteredData = data.filter((el) => el.timestamp >= filteredDates[0] && el.timestamp <= filteredDates[1]);
+        setData(filteredData);
+    }
 
     return (
-        <div>
+        <div className="game-data">
             {data && data.length ?
                 (<div>
-                    <DateRangePicker dateRange={data} />
+                    <DateRangePicker dateRange={data} filterRange={filterDate} />
                     <TabularView tabularData={data} />
+                    <LineChart lineChartData={data} />
                 </div>)
                 : null}
         </div>
